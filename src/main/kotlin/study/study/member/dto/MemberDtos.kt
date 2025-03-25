@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import study.study.common.annotation.ValidEnum
 import study.study.common.status.Gender
+import study.study.member.entity.Member
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -63,5 +64,8 @@ data class MemberDtoRequest(
 
     private fun String.toLocalDate(): LocalDate =
         LocalDate.parse(this, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+
+    fun toEntity(): Member =
+        Member(id, loginId, password, name, birthDate, gender, email)
 }
 
