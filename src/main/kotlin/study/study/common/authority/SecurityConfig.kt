@@ -1,5 +1,6 @@
 package study.study.common.authority
 
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -20,10 +21,12 @@ class SecurityConfig (
         http
             .httpBasic { it.disable() }
             .csrf { it.disable() }
-            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-            .authorizeRequests {
-                it.requestMatchers( "/api/mamber/signup").anonymous()
-                    .anyRequest().perm
+            .sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            }
+            .authorizeHttpRequests {
+                it.requestMatchers("/api/member/signup").anonymous()
+                    .anyRequest().permitAll()
             }
             .addFilterBefore(
                 JwtAuthenticationFilter(jwtTokenProvider),
@@ -31,6 +34,7 @@ class SecurityConfig (
             )
         return http.build()
     }
+
     @Bean
     fun passwordEncoder(): PasswordEncoder =
         PasswordEncoderFactories.createDelegatingPasswordEncoder()

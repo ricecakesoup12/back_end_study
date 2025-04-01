@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
+import study.study.common.status.Dormitory
 import study.study.member.entity.Member
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -43,8 +44,8 @@ data class MemberDtoRequest(
         get() = _password!!
     val name: String
         get() = _name!!
-    val dormitory: String
-        get() = _dormitory!!
+    val dormitory: Dormitory
+        get() = Dormitory.valueOf(_dormitory!!)
     val email: String
         get() = _email!!
 

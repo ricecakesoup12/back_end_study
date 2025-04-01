@@ -1,6 +1,7 @@
 package study.study.member.entity
 
 import jakarta.persistence.*
+import study.study.common.status.Dormitory
 import study.study.common.status.Gender
 import java.time.LocalDate
 
@@ -24,7 +25,8 @@ class Member(
     val name: String,
 
     @Column(nullable = false, length = 10)
-    val dormitory: String,
+    @Enumerated(EnumType.STRING)
+    val dormitory: Dormitory,
 
     @Column(nullable = false, length = 30)
     val email: String,
