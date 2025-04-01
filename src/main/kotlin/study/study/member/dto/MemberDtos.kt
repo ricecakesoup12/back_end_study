@@ -4,11 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
-import study.study.common.annotation.ValidEnum
-import study.study.common.status.Gender
 import study.study.member.entity.Member
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 data class MemberDtoRequest(
@@ -32,17 +29,8 @@ data class MemberDtoRequest(
     private val _name: String?,
 
     @field:NotBlank
-    @field:Pattern(
-        regexp = "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$",
-        message = "날짜형식(YYYY-MM-DD)을 확인해주세요"
-    )
-    @JsonProperty("birthDate")
-    private val _birthDate: String?,
-
-    @field:NotBlank
-    @field:ValidEnum(enumClass = Gender::class, message = "MAN 아니면 WOMAN")
-    @JsonProperty("gender")
-    private val _gender: String?,
+    @JsonProperty("dormitory")
+    private val _dormitory: String?,
 
     @field:NotBlank
     @field:Email
@@ -55,10 +43,8 @@ data class MemberDtoRequest(
         get() = _password!!
     val name: String
         get() = _name!!
-    val birthDate: LocalDate
-        get() = _birthDate!!.toLocalDate()
-    val gender: Gender
-        get() = Gender.valueOf(_gender!!)
+    val dormitory: String
+        get() = _dormitory!!
     val email: String
         get() = _email!!
 
@@ -66,6 +52,6 @@ data class MemberDtoRequest(
         LocalDate.parse(this, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
     fun toEntity(): Member =
-        Member(id, loginId, password, name, birthDate, gender, email)
+        Member(id, loginId, password, name, dormitory, email)
 }
 

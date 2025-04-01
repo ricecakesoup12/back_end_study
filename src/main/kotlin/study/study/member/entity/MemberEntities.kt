@@ -23,12 +23,8 @@ class Member(
     @Column(nullable = false, length = 10)
     val name: String,
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    val birthDate: LocalDate,
-
-    @Column(nullable = false, length = 5)
-    val gender: Gender,
+    @Column(nullable = false, length = 10)
+    val dormitory: String,
 
     @Column(nullable = false, length = 30)
     val email: String,

@@ -4,13 +4,11 @@ package study.study.common.exception
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.FieldError
-import org.springframework.web.ErrorResponse
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import study.study.common.dto.BaseResponse
 import study.study.common.status.ResultCode
-import kotlin.enums.enumEntries
 
 @RestControllerAdvice
 class CustomExceptionHandler {
