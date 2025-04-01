@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import study.study.common.status.Dormitory
 import study.study.member.entity.Member
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 data class MemberDtoRequest(
     val id: Long?,
@@ -37,6 +35,7 @@ data class MemberDtoRequest(
     @field:Email
     @JsonProperty("email")
     private val _email: String?,
+
 ) {
     val loginId: String
         get() = _loginId!!
@@ -48,9 +47,6 @@ data class MemberDtoRequest(
         get() = Dormitory.valueOf(_dormitory!!)
     val email: String
         get() = _email!!
-
-    private fun String.toLocalDate(): LocalDate =
-        LocalDate.parse(this, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
     fun toEntity(): Member =
         Member(id, loginId, password, name, dormitory, email)
