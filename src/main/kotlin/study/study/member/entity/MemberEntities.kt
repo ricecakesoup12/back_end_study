@@ -2,8 +2,7 @@ package study.study.member.entity
 
 import jakarta.persistence.*
 import study.study.common.status.Dormitory
-import study.study.common.status.Gender
-import java.time.LocalDate
+import study.study.common.status.ROLE
 
 @Entity
 @Table(
@@ -30,4 +29,22 @@ class Member(
 
     @Column(nullable = false, length = 30)
     val email: String,
+) {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    val memberRole: List<MemberRole>? = null
+}
+
+@Entity
+class MemberRole(
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    val id: Long? = null,
+
+    @Column(nullable = false, length = 30)
+    @Enumerated(EnumType.STRING)
+    val role: ROLE,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns(foreignKey = ForeignKey(name = "uk_member_role_member_id"))
+    val member: Member,
 )

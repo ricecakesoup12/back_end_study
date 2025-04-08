@@ -36,10 +36,7 @@ class JwtTokenProvider {
         //Access Token
         val accessToken = Jwts
             .builder()
-            .setSubject(authentication.name)
             .claim("auth", authorities)
-            .setIssuedAt(now)
-            .setExpiration(accessException)
             .signWith(key, Jwts.SIG.HS256)
             .compact()
         return TokenInfo("Bearer", accessToken)
